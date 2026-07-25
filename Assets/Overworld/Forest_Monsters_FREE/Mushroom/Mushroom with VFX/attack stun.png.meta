@@ -1,0 +1,1224 @@
+fileFormatVersion: 2
+guid: c46b7bbe7c7f14740962734d8028b39d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4191070857825413744
+    second: Mushroom-AttackWithStun_0
+  - first:
+      213: 1681734116533123247
+    second: Mushroom-AttackWithStun_1
+  - first:
+      213: -7987500425088903183
+    second: Mushroom-AttackWithStun_2
+  - first:
+      213: 5126777634838683126
+    second: Mushroom-AttackWithStun_3
+  - first:
+      213: 8237386796742481718
+    second: Mushroom-AttackWithStun_4
+  - first:
+      213: 7094764511624755392
+    second: Mushroom-AttackWithStun_5
+  - first:
+      213: -3681996215672563236
+    second: Mushroom-AttackWithStun_6
+  - first:
+      213: 8691348243322859941
+    second: Mushroom-AttackWithStun_7
+  - first:
+      213: -5026304422785248714
+    second: Mushroom-AttackWithStun_8
+  - first:
+      213: 2625544723725328488
+    second: Mushroom-AttackWithStun_9
+  - first:
+      213: 6371645915762314557
+    second: Mushroom-AttackWithStun_10
+  - first:
+      213: -4912325618617226985
+    second: Mushroom-AttackWithStun_11
+  - first:
+      213: -7284461895632885061
+    second: Mushroom-AttackWithStun_12
+  - first:
+      213: 6038201937574008617
+    second: Mushroom-AttackWithStun_13
+  - first:
+      213: -7225678733753629970
+    second: Mushroom-AttackWithStun_14
+  - first:
+      213: 6013317811104241748
+    second: Mushroom-AttackWithStun_15
+  - first:
+      213: -7494675622955115556
+    second: Mushroom-AttackWithStun_16
+  - first:
+      213: -7798441643429965357
+    second: Mushroom-AttackWithStun_17
+  - first:
+      213: 8821172986450378394
+    second: Mushroom-AttackWithStun_18
+  - first:
+      213: -1369991433851979880
+    second: Mushroom-AttackWithStun_19
+  - first:
+      213: 1458573622006430679
+    second: Mushroom-AttackWithStun_20
+  - first:
+      213: -3089611523389206511
+    second: Mushroom-AttackWithStun_21
+  - first:
+      213: 1391680026071204206
+    second: Mushroom-AttackWithStun_22
+  - first:
+      213: -5789220328210520580
+    second: Mushroom-AttackWithStun_23
+  - first:
+      213: 6490531321357198199
+    second: Mushroom-AttackWithStun_24
+  - first:
+      213: 3579112240225290584
+    second: Mushroom-AttackWithStun_25
+  - first:
+      213: 6393354138213514412
+    second: Mushroom-AttackWithStun_26
+  - first:
+      213: -8703602412594680296
+    second: Mushroom-AttackWithStun_27
+  - first:
+      213: -3086530509719154219
+    second: Mushroom-AttackWithStun_28
+  - first:
+      213: -5614380305457532092
+    second: Mushroom-AttackWithStun_29
+  - first:
+      213: 7770365712321887174
+    second: Mushroom-AttackWithStun_30
+  - first:
+      213: -3633287576668046464
+    second: Mushroom-AttackWithStun_31
+  - first:
+      213: 4099528944867169301
+    second: Mushroom-AttackWithStun_32
+  - first:
+      213: -4218646041444118210
+    second: Mushroom-AttackWithStun_33
+  - first:
+      213: -6762598539721335364
+    second: Mushroom-AttackWithStun_34
+  - first:
+      213: -1628604996563653042
+    second: Mushroom-AttackWithStun_35
+  - first:
+      213: 7428263733240266633
+    second: Mushroom-AttackWithStun_36
+  - first:
+      213: -3311038994048518178
+    second: Mushroom-AttackWithStun_37
+  - first:
+      213: -5937308214539590361
+    second: Mushroom-AttackWithStun_38
+  - first:
+      213: 6809204783059043183
+    second: Mushroom-AttackWithStun_39
+  - first:
+      213: 2774081987568605078
+    second: Mushroom-AttackWithStun_40
+  - first:
+      213: 5251203951537824197
+    second: Mushroom-AttackWithStun_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: attack stun_0
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 0
+        width: 30
+        height: 42
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69f4e96359a062b4ab7504759f5d11c9
+      internalID: 1011644488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_1
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 34
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c52ea30dfce72314eb246552dc11008e
+      internalID: -1886209880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_2
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 33
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af1f3d33ef04d6143b6748e4e28ec0a2
+      internalID: 939571981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_3
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 35
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 347d710dd3f0f1544acce7b0b21c3e13
+      internalID: 1650291733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_4
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 33
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fce6f30eb5c58c4693bf718a44871fa
+      internalID: 432580525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_5
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 33
+        width: 9
+        height: 11
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d96eceb6b4bb1e3458200f2fefdfbbd8
+      internalID: 2144366013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_6
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 33
+        width: 14
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07fcd85a4e8f90f479b37a1f6a28f79c
+      internalID: -1714149743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_7
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 33
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88916e535a340d746ab89a4beb94b1b7
+      internalID: -1547536195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_8
+      rect:
+        serializedVersion: 2
+        x: 1244
+        y: 35
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7a408cbca29dfe428d3883b6439f228
+      internalID: -1748828489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_9
+      rect:
+        serializedVersion: 2
+        x: 1305
+        y: 34
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d91a47e32683a2d45a75005a5603fcaa
+      internalID: -2007839913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_10
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 34
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49f0d285527ad9e4ab99855828b4ad0a
+      internalID: 182046505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_11
+      rect:
+        serializedVersion: 2
+        x: 1387
+        y: 34
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf89ebb7853d5ea438c6ecf2782ea0cb
+      internalID: -1423325604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_12
+      rect:
+        serializedVersion: 2
+        x: 1407
+        y: 33
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0903b7e20fd29b4a8295c038283716e
+      internalID: -1490453687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_13
+      rect:
+        serializedVersion: 2
+        x: 1469
+        y: 35
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eef169ef4597496418674231202a26c9
+      internalID: -251483491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_14
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 33
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 316809e6d06e88341b1c0735c82386fe
+      internalID: -844598101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_15
+      rect:
+        serializedVersion: 2
+        x: 1558
+        y: 33
+        width: 9
+        height: 11
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 232fc646b9756a44e857cbc6c32215e2
+      internalID: 869238795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_16
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 33
+        width: 14
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6e755b1d70ace14d8b87c3e1a7581a9
+      internalID: 761376167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_17
+      rect:
+        serializedVersion: 2
+        x: 1711
+        y: 33
+        width: 7
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39c091b73f74b6e4a9e4b35a26d55555
+      internalID: 1827340468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_18
+      rect:
+        serializedVersion: 2
+        x: 1725
+        y: 35
+        width: 7
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab0d995fccd49694986212c1db40cb60
+      internalID: -506902178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_19
+      rect:
+        serializedVersion: 2
+        x: 1786
+        y: 0
+        width: 30
+        height: 42
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65487d5e08b7c954ca9754c0ad2e7f20
+      internalID: -975840456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_20
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c60135ccb570dbf4aa4c6db3721d1881
+      internalID: -325149382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_21
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 0
+        width: 29
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b3b926303423b84a8df9fe7bfc9ed32
+      internalID: -1679859465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_22
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 34
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7de214deb15bca45ac72f05312be611
+      internalID: -1422523146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_23
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0
+        width: 34
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adeb3996ed1bb1c41be3eeff77126e12
+      internalID: -573385730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_24
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 2
+        width: 28
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5aaf03b50194da46bcfe6caf342ec76
+      internalID: 311808326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_25
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 0
+        width: 32
+        height: 17
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fe333de7cba4ae41834ebd1c098bf16
+      internalID: -1064750682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_26
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 0
+        width: 32
+        height: 19
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee3bfb55e5ed9de40aced2795f19a23e
+      internalID: 1386555549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_27
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 0
+        width: 32
+        height: 22
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1ac174729a4b004f806a1a438fbea60
+      internalID: 1986660694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_28
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 3
+        width: 31
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85fb13dcdd0b1504fade19586b5ea1bb
+      internalID: -33449408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_29
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 0
+        width: 30
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3554fb5abb3c4824d84cc6574f7c837c
+      internalID: -1527749207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_30
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 076c7bad0c09eb349acd6345aa968754
+      internalID: -1274032273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_31
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b66b9686a07cb64fb41046ccfb8beb4
+      internalID: 451667906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_32
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d8157793ee95aa4e960d80abbbb79f2
+      internalID: -216647099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_33
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ac8c837379a3b046ba311ce075222a7
+      internalID: 1122868506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_34
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f955cbea6d433da47b39b77a24cece4c
+      internalID: -1924605060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_35
+      rect:
+        serializedVersion: 2
+        x: 1303
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfd7224642accce4f846eecd2258ae76
+      internalID: 62829618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_36
+      rect:
+        serializedVersion: 2
+        x: 1383
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a87309f82a061c3499c298022083ff22
+      internalID: 1921010663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_37
+      rect:
+        serializedVersion: 2
+        x: 1467
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c815ad506a9879a42a98bd52f6c81cc9
+      internalID: 1534335231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_38
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2d411d037f9e9a48a71afb51f84640e
+      internalID: 1635822149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_39
+      rect:
+        serializedVersion: 2
+        x: 1631
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51061a52c384674459f952f76e317629
+      internalID: -1188685878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_40
+      rect:
+        serializedVersion: 2
+        x: 1711
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e3c9894b1a6f6142a313b075ea0e27f
+      internalID: -1075790593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack stun_41
+      rect:
+        serializedVersion: 2
+        x: 1865
+        y: 0
+        width: 30
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e9c871d2107b3b428a95ea9a9db08a0
+      internalID: -1552371156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 53b08016d53fe2a4f8ce82786888df65
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      attack stun_0: 1011644488
+      attack stun_1: -1886209880
+      attack stun_10: 182046505
+      attack stun_11: -1423325604
+      attack stun_12: -1490453687
+      attack stun_13: -251483491
+      attack stun_14: -844598101
+      attack stun_15: 869238795
+      attack stun_16: 761376167
+      attack stun_17: 1827340468
+      attack stun_18: -506902178
+      attack stun_19: -975840456
+      attack stun_2: 939571981
+      attack stun_20: -325149382
+      attack stun_21: -1679859465
+      attack stun_22: -1422523146
+      attack stun_23: -573385730
+      attack stun_24: 311808326
+      attack stun_25: -1064750682
+      attack stun_26: 1386555549
+      attack stun_27: 1986660694
+      attack stun_28: -33449408
+      attack stun_29: -1527749207
+      attack stun_3: 1650291733
+      attack stun_30: -1274032273
+      attack stun_31: 451667906
+      attack stun_32: -216647099
+      attack stun_33: 1122868506
+      attack stun_34: -1924605060
+      attack stun_35: 62829618
+      attack stun_36: 1921010663
+      attack stun_37: 1534335231
+      attack stun_38: 1635822149
+      attack stun_39: -1188685878
+      attack stun_4: 432580525
+      attack stun_40: -1075790593
+      attack stun_41: -1552371156
+      attack stun_5: 2144366013
+      attack stun_6: -1714149743
+      attack stun_7: -1547536195
+      attack stun_8: -1748828489
+      attack stun_9: -2007839913
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
