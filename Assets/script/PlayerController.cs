@@ -1,149 +1,128 @@
 using UnityEngine;
 using System.Collections;
 
+// บังคับว่าฮีโร่ต้องมีสคริปต์ Stamina ติดอยู่ด้วย
+[RequireComponent(typeof(Stamina))]
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 7f; // ความเร็วตอนวิ่ง (ปรับตัวเลขใน Unity ได้เลย)
-    public float jumpForce = 7f; // ความแรงในการกระโดด
+    public float moveSpeed = 7f; // ความเร็วตอนวิ่ง[cite: 5]
+    public float jumpForce = 7f; // ความแรงในการกระโดด[cite: 5]
 
     [Header("Attack Settings")]
-    public Transform attackPoint;      // จุดศูนย์กลางการฟัน (ลาก AttackPoint มาใส่)
-    public float attackRange = 0.5f;   // รัศมีความกว้างของดาบ
-    public LayerMask enemyLayers;      // กำหนดว่าฟันโดน Layer ไหนได้บ้าง
-    public int attackDamage = 40;
+    public Transform attackPoint;      // จุดศูนย์กลางการฟัน[cite: 5]
+    public float attackRange = 0.5f;   // รัศมีความกว้างของดาบ[cite: 5]
+    public LayerMask enemyLayers;      // กำหนดว่าฟันโดน Layer ไหนได้บ้าง[cite: 5]
+    public int attackDamage = 40;      //[cite: 5]
+
+    [Header("Stamina Costs (ใช้พลังงานเท่าไหร่)")]
+    public float jumpStaminaCost = 15f; 
+    public float attackStaminaCost = 10f;
 
     [Header("Status Effects")]
-    public bool isStunned = false;
+    public bool isStunned = false; //[cite: 5]
 
-    private Animator anim;
-    private Rigidbody2D rb;
-    private SpriteRenderer spriteRender;
+    private Animator anim; //[cite: 5]
+    private Rigidbody2D rb; //[cite: 5]
+    private SpriteRenderer spriteRender; //[cite: 5]
+    
+    // ประกาศตัวแปรเรียกใช้ Stamina
+    private Stamina staminaSystem;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        spriteRender = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>(); //[cite: 5]
+        rb = GetComponent<Rigidbody2D>(); //[cite: 5]
+        spriteRender = GetComponent<SpriteRenderer>(); //[cite: 5]
+        
+        // ดึงคอมโพเนนต์ Stamina มาใช้งาน
+        staminaSystem = GetComponent<Stamina>();
     }
 
     void Update()
     {
-        // 1. รับค่าการกดปุ่มซ้าย-ขวา
-        float moveInput = Input.GetAxisRaw("Horizontal");
+        float moveInput = Input.GetAxisRaw("Horizontal"); //[cite: 5]
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y); //[cite: 5]
 
-        // 2. เคลื่อนที่ด้วยความเร็ววิ่งทันที
-        // แก้จาก rb.velocity เป็น rb.linearVelocity
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        if (moveInput != 0) anim.SetFloat("Speed", 1f); //[cite: 5]
+        else anim.SetFloat("Speed", 0f); //[cite: 5]
 
-        // 3. ควบคุมอนิเมชัน
-        if (moveInput != 0)
-        {
-            // ถ้ามีการเคลื่อนที่ ให้ส่งค่าไปให้ระบบเล่นท่าวิ่ง
-            anim.SetFloat("Speed", 1f);
-        }
-        else
-        {
-            // ถ้ายืนนิ่ง ให้ส่งค่า 0 เพื่อกลับไปท่า Idel
-            anim.SetFloat("Speed", 0f);
-        }
-
-        // 4. หันหน้าตัวละครซ้าย-ขวา
         if (moveInput > 0) 
         {
-            spriteRender.flipX = false;
-            // ย้ายจุดฟันมาฝั่งขวา (ค่าบวก)
-            if (attackPoint != null) 
-            {
-                attackPoint.localPosition = new Vector3(Mathf.Abs(attackPoint.localPosition.x), attackPoint.localPosition.y, attackPoint.localPosition.z);
-            }
+            spriteRender.flipX = false; //[cite: 5]
+            if (attackPoint != null) attackPoint.localPosition = new Vector3(Mathf.Abs(attackPoint.localPosition.x), attackPoint.localPosition.y, attackPoint.localPosition.z); //[cite: 5]
         }
         else if (moveInput < 0) 
         {
-            spriteRender.flipX = true;
-            // ย้ายจุดฟันไปฝั่งซ้าย (ค่าลบ)
-            if (attackPoint != null) 
-            {
-                attackPoint.localPosition = new Vector3(-Mathf.Abs(attackPoint.localPosition.x), attackPoint.localPosition.y, attackPoint.localPosition.z);
-            }
+            spriteRender.flipX = true; //[cite: 5]
+            if (attackPoint != null) attackPoint.localPosition = new Vector3(-Mathf.Abs(attackPoint.localPosition.x), attackPoint.localPosition.y, attackPoint.localPosition.z); //[cite: 5]
         }
-        // --- เช็คพื้น ---
-        // แก้จาก rb.velocity.y เป็น rb.linearVelocity.y
-        bool isGrounded = Mathf.Abs(rb.linearVelocity.y) < 0.001f;
+        
+        bool isGrounded = Mathf.Abs(rb.linearVelocity.y) < 0.001f; //[cite: 5]
 
-        // 5. ระบบโจมตี
-        // ท่าฟัน 1 (ปุ่ม K) : บังคับว่าต้องเหยียบพื้นอยู่ถึงจะฟันได้
+        // --- แก้ไขระบบโจมตี (หัก Stamina ก่อนฟัน) ---
         if (Input.GetKeyDown(KeyCode.K) && isGrounded) 
         {
-            anim.SetTrigger("Attack"); 
-            AttackEnemy(); // เรียกใช้คำสั่งลดเลือดศัตรู
+            // เช็คว่าพลังงานพอไหม ถ้าพอก็ฟันได้
+            if (staminaSystem.UseStamina(attackStaminaCost))
+            {
+                anim.SetTrigger("Attack"); //[cite: 5]
+                AttackEnemy(); //[cite: 5]
+            }
         }
 
-        // ท่าฟัน 2 (ปุ่ม J)
         if (Input.GetKeyDown(KeyCode.J)) 
         {
-            anim.SetTrigger("Attack2"); 
-            AttackEnemy(); // เรียกใช้คำสั่งลดเลือดศัตรู
+            if (staminaSystem.UseStamina(attackStaminaCost))
+            {
+                anim.SetTrigger("Attack2"); //[cite: 5]
+                AttackEnemy(); //[cite: 5]
+            }
         }
 
-        // 6. ระบบกระโดดด้วย Spacebar
+        // --- แก้ไขระบบกระโดด (หัก Stamina ก่อนกระโดด) ---
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            // เพิ่มแรงผลักขึ้นไปด้านบนเพื่อให้ตัวละครกระโดด
-            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            if (staminaSystem.UseStamina(jumpStaminaCost))
+            {
+                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); //[cite: 5]
+            }
         }
 
         if (isStunned)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-            anim.SetFloat("Speed", 0f);
-            return; 
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); //[cite: 5]
+            anim.SetFloat("Speed", 0f); //[cite: 5]
+            return;  //[cite: 5]
         }
 
-        // 7. ส่งค่าไปให้ Animator ควบคุมท่ากระโดดและร่วง
-        // แก้จาก rb.velocity.y เป็น rb.linearVelocity.y
-        anim.SetBool("isGrounded", isGrounded);
-        anim.SetFloat("Floating", rb.linearVelocity.y);
+        anim.SetBool("isGrounded", isGrounded); //[cite: 5]
+        anim.SetFloat("Floating", rb.linearVelocity.y); //[cite: 5]
     }
 
     void AttackEnemy()
     {
-        // สร้างวงกลมล่องหนเพื่อเช็คว่ามีศัตรูอยู่ในระยะไหม
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        // สั่งลดเลือดศัตรูทุกตัวที่โดนฟัน
-        foreach (Collider2D enemy in hitEnemies)
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers); //[cite: 5]
+        foreach (Collider2D enemy in hitEnemies) //[cite: 5]
         {
-            // เรียกใช้คำสั่ง TakeDamage จากสคริปต์ของเห็ด
-            enemy.GetComponent<EnemyController>().TakeDamage(attackDamage);
+            enemy.GetComponent<EnemyController>().TakeDamage(attackDamage); //[cite: 5]
         }
     }
 
-    // ฟังก์ชันพิเศษสำหรับวาดวงกลมสีแดงในหน้า Scene ให้เราเห็นระยะฟันได้ง่ายๆ
     void OnDrawGizmosSelected()
     {
-        if (attackPoint == null)
-            return;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        if (attackPoint == null) return; //[cite: 5]
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange); //[cite: 5]
     }
 
-    public void ApplyStun(float stunTime)
+    public void ApplyStun(float stunTime) //[cite: 5]
     {
-        if (!isStunned)
-        {
-            StartCoroutine(StunRoutine(stunTime));
-        }
+        if (!isStunned) StartCoroutine(StunRoutine(stunTime)); //[cite: 5]
     }
 
-    private IEnumerator StunRoutine(float stunTime)
+    private IEnumerator StunRoutine(float stunTime) //[cite: 5]
     {
-        isStunned = true;
-        Debug.Log("ฮีโร่ติดสตันขยับไม่ได้!");
-        
-        // (ตัวเลือกเสริม) สั่งเปลี่ยนสีฮีโร่เป็นสีเทาหรือเหลืองตอนติดสตันได้ตรงนี้
-
-        yield return new WaitForSeconds(stunTime); // รอเวลาตามที่กำหนด
-
-        isStunned = false;
-        Debug.Log("หายสตันแล้ว!");
+        isStunned = true; //[cite: 5]
+        yield return new WaitForSeconds(stunTime); //[cite: 5]
+        isStunned = false; //[cite: 5]
     }
 }
