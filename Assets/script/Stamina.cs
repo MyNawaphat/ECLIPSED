@@ -4,49 +4,56 @@ using UnityEngine.UI;
 public class Stamina : MonoBehaviour
 {
     [Header("Stamina Settings")]
-    public float maxStamina = 100f;
-    public float currentStamina;
-    public float staminaRegenRate = 5f;
-    public Image staminaBar;
+    public float maxStamina = 100f; //[cite: 6]
+    public float currentStamina; //[cite: 6]
+    public float staminaRegenRate = 5f; //[cite: 6]
+    public Image staminaBar; //[cite: 6]
 
     void Start()
     {
-        currentStamina = maxStamina;
-        UpdateUI();
+        currentStamina = maxStamina; //[cite: 6]
+        UpdateUI(); //[cite: 6]
     }
 
     void Update()
     {
-        // ฟื้นฟูพลังงานอัตโนมัติ
-        if (currentStamina < maxStamina)
+        if (currentStamina < maxStamina) //[cite: 6]
         {
-            currentStamina += staminaRegenRate * Time.deltaTime;
-            currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
-            UpdateUI();
+            currentStamina += staminaRegenRate * Time.deltaTime; //[cite: 6]
+            currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina); //[cite: 6]
+            UpdateUI(); //[cite: 6]
         }
     }
 
-    // ฟังก์ชันสำหรับใช้พลังงาน (เช็คว่าพลังงานพอไหม)
-    public bool UseStamina(float amount)
+    public bool UseStamina(float amount) //[cite: 6]
     {
-        if (currentStamina >= amount)
+        if (currentStamina >= amount) //[cite: 6]
         {
-            currentStamina -= amount;
-            UpdateUI();
-            return true; // อนุญาตให้โจมตี/กระโดดได้
+            currentStamina -= amount; //[cite: 6]
+            UpdateUI(); //[cite: 6]
+            return true; //[cite: 6]
         }
-        else
+        else //[cite: 6]
         {
-            Debug.Log("Stamina ไม่พอ!");
-            return false; // ไม่อนุญาตให้ทำแอ็กชัน
+            Debug.Log("Stamina ไม่พอ!"); //[cite: 6]
+            return false; //[cite: 6]
         }
     }
 
-    private void UpdateUI()
+    // === [ส่วนที่เพิ่มเข้ามาใหม่] ฟังก์ชันสำหรับรับพลังงานจากถ้วยชา ===
+    public void RestoreStamina(float amount)
     {
-        if (staminaBar != null)
+        currentStamina += amount;
+        currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina); // ป้องกันพลังงานล้นหลอด
+        UpdateUI();
+    }
+    // =======================================================
+
+    private void UpdateUI() //[cite: 6]
+    {
+        if (staminaBar != null) //[cite: 6]
         {
-            staminaBar.fillAmount = currentStamina / maxStamina;
+            staminaBar.fillAmount = currentStamina / maxStamina; //[cite: 6]
         }
     }
 }
