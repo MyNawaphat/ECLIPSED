@@ -97,6 +97,11 @@ public class PlayerController : MonoBehaviour
 
         anim.SetBool("isGrounded", isGrounded); //[cite: 5]
         anim.SetFloat("Floating", rb.linearVelocity.y); //[cite: 5]
+        Health hp = GetComponent<Health>();
+    if (hp != null && hp.currentHealth <= 0) 
+    {
+        return; // เด้งออกจาก Update ทันที ไม่สั่ง Animator เล่นท่า Idel หรือ Run อีก
+    }
     }
 
     void AttackEnemy()

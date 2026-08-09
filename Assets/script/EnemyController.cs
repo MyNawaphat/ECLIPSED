@@ -89,26 +89,15 @@ public class EnemyController : MonoBehaviour
 
         if (randomVal <= stunChance)
         {
-            // --- โจมตีติดสตัน ---
-            if (anim != null) anim.SetTrigger("isAttackStun"); // เล่นท่าสตัน
-            
-            Health hp = player.GetComponent<Health>();
-            if (hp != null) hp.TakeDamage(attackDamage);
-
-            PlayerController pc = player.GetComponent<PlayerController>();
-            if (pc != null) pc.ApplyStun(stunDuration); // สั่งสตันฮีโร่
-            
-            Debug.Log("มอนสเตอร์ใช้ท่าสตัน!");
+            // --- แค่สั่งง้างท่าสตัน (ยังไม่ลดเลือด) ---
+            if (anim != null) anim.SetTrigger("isAttackStun"); 
+            Debug.Log("มอนสเตอร์ง้างท่าสตัน!");
         }
         else
         {
-            // --- โจมตีธรรมดา ---
-            if (anim != null) anim.SetTrigger("isAttack"); // เล่นท่าตีธรรมดา
-            
-            Health hp = player.GetComponent<Health>();
-            if (hp != null) hp.TakeDamage(attackDamage);
-            
-            Debug.Log("มอนสเตอร์ตีธรรมดา");
+            // --- แค่สั่งง้างตีธรรมดา (ยังไม่ลดเลือด) ---
+            if (anim != null) anim.SetTrigger("isAttack"); 
+            Debug.Log("มอนสเตอร์ง้างตีธรรมดา");
         }
     }
 
@@ -181,5 +170,35 @@ public class EnemyController : MonoBehaviour
         // เพิ่มเส้นสีแดง เพื่อดูระยะโจมตีใน Scene
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange); 
+    }
+
+    public void Event_DealNormalDamage()
+    {
+        if (player == null) return;
+        
+        // ระยะโจมตียังถึงอยู่ไหม (ป้องกันบั๊กผู้เล่นวิ่งหนีพ้นแล้วแต่ยังโดนดาเมจ)
+        if (Vector2.Distance(transform.position, player.position) <= attackRange + 0.5f)
+        {
+            Health hp = player.GetComponent<Health>();
+            if (hp != null) hp.TakeDamage(attackDamage);
+            Debug.Log("ดาเมจตีธรรมดาเข้าแล้ว!");
+        }
+    }
+
+    // 2. ฟังก์ชันนี้เอาไว้เลือกในหมุดของคลิปอนิเมชัน "ตีสตัน"
+    public void Event_DealStunDamage()
+    {
+        if (player == null) return;
+
+        if (Vector2.Distance(transform.position, player.position) <= attackRange + 0.5f)
+        {
+            Health hp = player.GetComponent<Health>();
+            if (hp != null) hp.TakeDamage(attackDamage);
+
+            PlayerController pc = player.GetComponent<PlayerController>();
+            if (pc != null) pc.ApplyStun(stunDuration); // สั่งสตันฮีโร่
+            
+            Debug.Log("ดาเมจสตันเข้าแล้ว!");
+        }
     }
 }
