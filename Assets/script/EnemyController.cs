@@ -9,10 +9,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("AI Settings & Speeds")]
     public float chaseSpeed = 4f;     
-    public float retreatSpeed = 2f;   
     public float detectionRange = 7f; 
-    public float retreatRange = 3f;   
-    public int runAwayHealth = 20;    
 
     [Header("Combat Options")]
     public float attackRange = 1.5f;  // ระยะที่จะหยุดเดินแล้วง้างตี
@@ -41,40 +38,41 @@ public class EnemyController : MonoBehaviour
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) player = playerObj.transform;
+
+        // ทำให้มอนสเตอร์พร้อมโจมตีทันทีตั้งแต่เริ่มเกม
+        lastAttackTime = -attackCooldown; 
     }
 
     void Update()
     {
         if (isDead || player == null) return;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        float distanceToPlayer = Mathf.Abs(transform.position.x - player.position.x);
         bool isCooldown = Time.time < lastAttackTime + attackCooldown;
-        bool isLowHealth = currentHealth <= runAwayHealth;
 
-        // --- ระบบ AI โจมตีใหม่ ---
+        // --- ระบบ AI โจมตีใหม่ (ดุดัน ไม่เดินหนี) ---
         if (distanceToPlayer <= attackRange)
         {
-            Idle(); // หยุดเดินเพื่อเตรียมตี
-
+            // สั่งหยุดเดินตรงๆ แทนการเรียก Idle() เพื่อป้องกันบั๊กหันหน้ามั่ว
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            
+            // หันหน้าจ้องฮีโร่เสมอ
             bool playerIsRight = player.position.x > transform.position.x;
             FlipSprite(playerIsRight);
 
+            // โจมตีถ้าไม่ติดคูลดาวน์
             if (!isCooldown) 
             {
-                AttackPlayer(); // โจมตี
+                AttackPlayer(); 
             }
-        }
-        else if (isLowHealth || (isCooldown && distanceToPlayer < retreatRange))
-        {
-            RetreatFromPlayer();
         }
         else if (distanceToPlayer <= detectionRange)
         {
-            ChasePlayer();
+            ChasePlayer(); // วิ่งไล่ตาม
         }
         else
         {
-            Idle();
+            Idle(); // ยืนเฝ้ายามหันซ้ายขวา
         }
 
         if (anim != null) anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
@@ -125,18 +123,10 @@ public class EnemyController : MonoBehaviour
         FlipSprite(playerIsRight);
     }
 
-    void RetreatFromPlayer()
-    {
-        bool playerIsRight = player.position.x > transform.position.x;
-        rb.linearVelocity = new Vector2(playerIsRight ? -retreatSpeed : retreatSpeed, rb.linearVelocity.y);
-        FlipSprite(!playerIsRight); 
-    }
-
     void FlipSprite(bool faceRight)
     {
         if (spriteRender != null)
         {
-            // === [ส่วนที่ต้องแก้] เปลี่ยนจาก !faceRight เป็น faceRight เฉยๆ ===
             spriteRender.flipX = faceRight; 
         }
     }
@@ -164,8 +154,6 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange); 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, retreatRange); 
         
         // เพิ่มเส้นสีแดง เพื่อดูระยะโจมตีใน Scene
         Gizmos.color = Color.red;

@@ -5,34 +5,42 @@ using System.Collections;
 [RequireComponent(typeof(Stamina))]
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 7f; // ความเร็วตอนวิ่ง[cite: 5]
-    public float jumpForce = 7f; // ความแรงในการกระโดด[cite: 5]
+    public float moveSpeed = 7f; 
+    public float jumpForce = 7f; 
 
     [Header("Attack Settings")]
-    public Transform attackPoint;      // จุดศูนย์กลางการฟัน[cite: 5]
-    public float attackRange = 0.5f;   // รัศมีความกว้างของดาบ[cite: 5]
-    public LayerMask enemyLayers;      // กำหนดว่าฟันโดน Layer ไหนได้บ้าง[cite: 5]
-    public int attackDamage = 40;      //[cite: 5]
+    public Transform attackPoint;      
+    public float attackRange = 0.5f;   
+    public LayerMask enemyLayers;      
+    public int attackDamage = 40;
+    public float attackCooldown = 0.5f; // หน่วงเวลาฟัน (0.5 วินาทีฟันได้ 1 ครั้ง)
+    private float nextAttackTime = 0f;   
 
     [Header("Stamina Costs (ใช้พลังงานเท่าไหร่)")]
     public float jumpStaminaCost = 15f; 
     public float attackStaminaCost = 10f;
 
     [Header("Status Effects")]
-    public bool isStunned = false; //[cite: 5]
+    public bool isStunned = false; 
+    public GameObject stunEffect; // ช่องสำหรับใส่รูปดาวหมุน
 
-    private Animator anim; //[cite: 5]
-    private Rigidbody2D rb; //[cite: 5]
-    private SpriteRenderer spriteRender; //[cite: 5]
+    private Animator anim; 
+    private Rigidbody2D rb; 
+    private SpriteRenderer spriteRender; 
     
     // ประกาศตัวแปรเรียกใช้ Stamina
     private Stamina staminaSystem;
 
+    [Header("Ground Check (ระบบเช็กพื้น)")]
+    public Transform groundCheck;     // ใส่จุด GroundCheck ที่เท้า
+    public float groundCheckRadius = 0.2f; // รัศมีเรดาร์
+    public LayerMask groundLayer;     // กำหนดว่าอะไรคือพื้น
+
     void Start()
     {
-        anim = GetComponent<Animator>(); //[cite: 5]
-        rb = GetComponent<Rigidbody2D>(); //[cite: 5]
-        spriteRender = GetComponent<SpriteRenderer>(); //[cite: 5]
+        anim = GetComponent<Animator>(); 
+        rb = GetComponent<Rigidbody2D>(); 
+        spriteRender = GetComponent<SpriteRenderer>(); 
         
         // ดึงคอมโพเนนต์ Stamina มาใช้งาน
         staminaSystem = GetComponent<Stamina>();
@@ -40,94 +48,110 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float moveInput = Input.GetAxisRaw("Horizontal"); //[cite: 5]
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y); //[cite: 5]
-
-        if (moveInput != 0) anim.SetFloat("Speed", 1f); //[cite: 5]
-        else anim.SetFloat("Speed", 0f); //[cite: 5]
-
-        if (moveInput > 0) 
+        // ==========================================
+        // 1. ดักไว้ก่อนเลย: ถ้าเลือดหมด ให้เด้งออกทันทีไม่ต้องทำอะไรต่อ
+        // ==========================================
+        Health hp = GetComponent<Health>();
+        if (hp != null && hp.currentHealth <= 0) 
         {
-            spriteRender.flipX = false; //[cite: 5]
-            if (attackPoint != null) attackPoint.localPosition = new Vector3(Mathf.Abs(attackPoint.localPosition.x), attackPoint.localPosition.y, attackPoint.localPosition.z); //[cite: 5]
-        }
-        else if (moveInput < 0) 
-        {
-            spriteRender.flipX = true; //[cite: 5]
-            if (attackPoint != null) attackPoint.localPosition = new Vector3(-Mathf.Abs(attackPoint.localPosition.x), attackPoint.localPosition.y, attackPoint.localPosition.z); //[cite: 5]
-        }
-        
-        bool isGrounded = Mathf.Abs(rb.linearVelocity.y) < 0.001f; //[cite: 5]
-
-        // --- แก้ไขระบบโจมตี (หัก Stamina ก่อนฟัน) ---
-        if (Input.GetKeyDown(KeyCode.K) && isGrounded) 
-        {
-            // เช็คว่าพลังงานพอไหม ถ้าพอก็ฟันได้
-            if (staminaSystem.UseStamina(attackStaminaCost))
-            {
-                anim.SetTrigger("Attack"); //[cite: 5]
-                AttackEnemy(); //[cite: 5]
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.J)) 
-        {
-            if (staminaSystem.UseStamina(attackStaminaCost))
-            {
-                anim.SetTrigger("Attack2"); //[cite: 5]
-                AttackEnemy(); //[cite: 5]
-            }
-        }
-
-        // --- แก้ไขระบบกระโดด (หัก Stamina ก่อนกระโดด) ---
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            if (staminaSystem.UseStamina(jumpStaminaCost))
-            {
-                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); //[cite: 5]
-            }
+            return; 
         }
 
         if (isStunned)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); //[cite: 5]
-            anim.SetFloat("Speed", 0f); //[cite: 5]
-            return;  //[cite: 5]
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); 
+            anim.SetFloat("Speed", 0f); 
+            return;  
         }
 
-        anim.SetBool("isGrounded", isGrounded); //[cite: 5]
-        anim.SetFloat("Floating", rb.linearVelocity.y); //[cite: 5]
-        Health hp = GetComponent<Health>();
-    if (hp != null && hp.currentHealth <= 0) 
-    {
-        return; // เด้งออกจาก Update ทันที ไม่สั่ง Animator เล่นท่า Idel หรือ Run อีก
-    }
+        float moveInput = Input.GetAxisRaw("Horizontal"); 
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y); 
+
+        if (moveInput != 0) anim.SetFloat("Speed", 1f); 
+        else anim.SetFloat("Speed", 0f); 
+
+        if (moveInput > 0) 
+        {
+            spriteRender.flipX = false; 
+            if (attackPoint != null) attackPoint.localPosition = new Vector3(Mathf.Abs(attackPoint.localPosition.x), attackPoint.localPosition.y, attackPoint.localPosition.z); 
+        }
+        else if (moveInput < 0) 
+        {
+            spriteRender.flipX = true; 
+            if (attackPoint != null) attackPoint.localPosition = new Vector3(-Mathf.Abs(attackPoint.localPosition.x), attackPoint.localPosition.y, attackPoint.localPosition.z); 
+        }
+        
+        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        // --- ระบบโจมตี (บังคับ && isGrounded กลับมาแล้ว) ---
+        if (Input.GetKeyDown(KeyCode.K) && isGrounded) 
+        {
+            if (Time.time >= nextAttackTime && staminaSystem.UseStamina(attackStaminaCost))
+            {
+                anim.SetTrigger("Attack"); 
+                nextAttackTime = Time.time + attackCooldown;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.J) && isGrounded) 
+        {
+            if (Time.time >= nextAttackTime && staminaSystem.UseStamina(attackStaminaCost))
+            {
+                anim.SetTrigger("Attack2"); 
+                nextAttackTime = Time.time + attackCooldown;
+            }
+        }
+
+        // --- ระบบกระโดด (หัก Stamina ก่อนกระโดด) ---
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            if (staminaSystem.UseStamina(jumpStaminaCost))
+            {
+                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); 
+            }
+        }
+
+        anim.SetBool("isGrounded", isGrounded); 
+        anim.SetFloat("Floating", rb.linearVelocity.y); 
     }
 
-    void AttackEnemy()
+    public void AttackEnemy()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers); //[cite: 5]
-        foreach (Collider2D enemy in hitEnemies) //[cite: 5]
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers); 
+        foreach (Collider2D enemy in hitEnemies) 
         {
-            enemy.GetComponent<EnemyController>().TakeDamage(attackDamage); //[cite: 5]
+            // โจมตีโดนลูกกระจ๊อก
+            EnemyController enemyCtrl = enemy.GetComponent<EnemyController>();
+            if (enemyCtrl != null) enemyCtrl.TakeDamage(attackDamage);
+
+            BossController bossCtrl = enemy.GetComponent<BossController>();
+            if (bossCtrl != null) bossCtrl.TakeDamage(attackDamage);
         }
     }
 
     void OnDrawGizmosSelected()
     {
-        if (attackPoint == null) return; //[cite: 5]
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange); //[cite: 5]
+        if (attackPoint == null) return; 
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange); 
     }
 
-    public void ApplyStun(float stunTime) //[cite: 5]
+    public void ApplyStun(float stunTime) 
     {
-        if (!isStunned) StartCoroutine(StunRoutine(stunTime)); //[cite: 5]
+        if (!isStunned) StartCoroutine(StunRoutine(stunTime)); 
     }
 
-    private IEnumerator StunRoutine(float stunTime) //[cite: 5]
+    private IEnumerator StunRoutine(float stunTime) 
     {
-        isStunned = true; //[cite: 5]
-        yield return new WaitForSeconds(stunTime); //[cite: 5]
-        isStunned = false; //[cite: 5]
+        isStunned = true; 
+        
+        // 1. เปิดให้ดาวโชว์ขึ้นมาบนหัว
+        if (stunEffect != null) stunEffect.SetActive(true);
+
+        yield return new WaitForSeconds(stunTime); 
+        
+        isStunned = false; 
+        
+        // 2. ปิดดาวทิ้งเมื่อหายมึน
+        if (stunEffect != null) stunEffect.SetActive(false);
     }
 }
