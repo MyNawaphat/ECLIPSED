@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 4f7444abdc845e049bc4d1a9594c85ac
+guid: 4a2efa030e32d684499f1f34b815318a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3641206842415056288
-    second: Golem_1_idle_0
+      213: -1311867799583088996
+    second: Enemy3No-Move-Idle_0
   - first:
-      213: -5346422617274557279
-    second: Golem_1_idle_1
+      213: 5385227209657495745
+    second: Enemy3No-Move-Idle_1
   - first:
-      213: -4050087436769753263
-    second: Golem_1_idle_2
+      213: -5110991352871294919
+    second: Enemy3No-Move-Idle_2
   - first:
-      213: -6050510017157607022
-    second: Golem_1_idle_3
+      213: 70122170256292923
+    second: Enemy3No-Move-Idle_3
   - first:
-      213: -3526272731087257150
-    second: Golem_1_idle_4
+      213: 5708457759456396489
+    second: Enemy3No-Move-Idle_4
   - first:
-      213: -106065556061340719
-    second: Golem_1_idle_5
+      213: 1552369224773803690
+    second: Enemy3No-Move-Idle_5
   - first:
-      213: 6968488508171074597
-    second: Golem_1_idle_6
+      213: -1982836842812715544
+    second: Enemy3No-Move-Idle_6
   - first:
-      213: 7786588115404116445
-    second: Golem_1_idle_7
+      213: 6702726713523927469
+    second: Enemy3No-Move-Idle_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,13 +134,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Golem_1_idle_0
+      name: Enemy3No-Move-Idle_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 0
-        width: 40
-        height: 39
+        x: 10
+        y: 6
+        width: 43
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0a50fdbc45a288230800000000000000
-      internalID: 3641206842415056288
+      spriteID: c9e9395df2f4bcde0800000000000000
+      internalID: -1311867799583088996
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_idle_1
+      name: Enemy3No-Move-Idle_1
       rect:
         serializedVersion: 2
-        x: 115
-        y: 0
-        width: 40
-        height: 39
+        x: 74
+        y: 5
+        width: 43
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1ac5c36c4f0bdc5b0800000000000000
-      internalID: -5346422617274557279
+      spriteID: 1c037627d9b2cba40800000000000000
+      internalID: 5385227209657495745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_idle_2
+      name: Enemy3No-Move-Idle_2
       rect:
         serializedVersion: 2
-        x: 205
-        y: 0
-        width: 40
-        height: 38
+        x: 138
+        y: 4
+        width: 43
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 157011e3fe23bc7c0800000000000000
-      internalID: -4050087436769753263
+      spriteID: 938630a917c1219b0800000000000000
+      internalID: -5110991352871294919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_idle_3
+      name: Enemy3No-Move-Idle_3
       rect:
         serializedVersion: 2
-        x: 295
-        y: 0
-        width: 40
-        height: 38
+        x: 202
+        y: 3
+        width: 43
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 291d0654235480ca0800000000000000
-      internalID: -6050510017157607022
+      spriteID: b3c71090ebf19f000800000000000000
+      internalID: 70122170256292923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_idle_4
+      name: Enemy3No-Move-Idle_4
       rect:
         serializedVersion: 2
-        x: 385
-        y: 0
-        width: 41
-        height: 37
+        x: 266
+        y: 4
+        width: 43
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2c1c56252a9201fc0800000000000000
-      internalID: -3526272731087257150
+      spriteID: 9c488b76614883f40800000000000000
+      internalID: 5708457759456396489
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_idle_5
+      name: Enemy3No-Move-Idle_5
       rect:
         serializedVersion: 2
-        x: 475
-        y: 0
-        width: 41
-        height: 37
+        x: 330
+        y: 6
+        width: 43
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,20 +259,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1db3f0050fd278ef0800000000000000
-      internalID: -106065556061340719
+      spriteID: aae14eac59f1b8510800000000000000
+      internalID: 1552369224773803690
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_idle_6
+      name: Enemy3No-Move-Idle_6
       rect:
         serializedVersion: 2
-        x: 565
-        y: 0
-        width: 40
-        height: 38
+        x: 394
+        y: 7
+        width: 43
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,20 +281,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 52cbde6a06b05b060800000000000000
-      internalID: 6968488508171074597
+      spriteID: 8ed4790a56c8b74e0800000000000000
+      internalID: -1982836842812715544
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_idle_7
+      name: Enemy3No-Move-Idle_7
       rect:
         serializedVersion: 2
-        x: 655
-        y: 0
-        width: 40
-        height: 38
+        x: 458
+        y: 8
+        width: 43
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -303,8 +303,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd1d0f6c2a48f0c60800000000000000
-      internalID: 7786588115404116445
+      spriteID: da97d12fe6ed40d50800000000000000
+      internalID: 6702726713523927469
       vertices: []
       indices: 
       edges: []
@@ -323,14 +323,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Golem_1_idle_0: 3641206842415056288
-      Golem_1_idle_1: -5346422617274557279
-      Golem_1_idle_2: -4050087436769753263
-      Golem_1_idle_3: -6050510017157607022
-      Golem_1_idle_4: -3526272731087257150
-      Golem_1_idle_5: -106065556061340719
-      Golem_1_idle_6: 6968488508171074597
-      Golem_1_idle_7: 7786588115404116445
+      Enemy3No-Move-Idle_0: -1311867799583088996
+      Enemy3No-Move-Idle_1: 5385227209657495745
+      Enemy3No-Move-Idle_2: -5110991352871294919
+      Enemy3No-Move-Idle_3: 70122170256292923
+      Enemy3No-Move-Idle_4: 5708457759456396489
+      Enemy3No-Move-Idle_5: 1552369224773803690
+      Enemy3No-Move-Idle_6: -1982836842812715544
+      Enemy3No-Move-Idle_7: 6702726713523927469
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
