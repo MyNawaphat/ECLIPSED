@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections; 
+using UnityEngine.SceneManagement; 
 
 public class Health : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class Health : MonoBehaviour
     [Header("UI Settings")]
     public CanvasGroup deathUI; 
     public float fadeSpeed = 1f; 
+    // 🔴 1. เอากล่องใส่ปุ่ม Restart กลับมา
+    public CanvasGroup restartButtonUI; 
 
-    // 🔴 เพิ่มตัวแปรสำหรับทำตัวกระพริบขาว
     [Header("Hit Flash Effect")]
     public float flashDuration = 0.1f;
     private SpriteRenderer spriteRender;
@@ -30,7 +32,6 @@ public class Health : MonoBehaviour
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerController>(); 
         
-        // 🔴 ตั้งค่า Material สำหรับกระพริบขาว
         spriteRender = GetComponent<SpriteRenderer>();
         if (spriteRender != null)
         {
@@ -38,25 +39,34 @@ public class Health : MonoBehaviour
             whiteMaterial = new Material(Shader.Find("GUI/Text Shader"));
         }
 
-        // บังคับให้หน้าจอตั้งค่าโปร่งใสเป็น 0 ตอนเริ่มเกม
-        if(deathUI != null) deathUI.alpha = 0f;
+        if(deathUI != null) 
+        {
+            deathUI.alpha = 0f;
+            deathUI.interactable = false; 
+            deathUI.blocksRaycasts = false; 
+        }
+
+        // 🔴 2. ซ่อนปุ่ม Restart ตอนเริ่มเกม
+        if (restartButtonUI != null)
+        {
+            restartButtonUI.alpha = 0f;
+            restartButtonUI.interactable = false;
+            restartButtonUI.blocksRaycasts = false;
+        }
         
         UpdateUI();
     }
 
     public void TakeDamage(float damage)
     {
-        // ถ้าตายไปแล้ว (isDead = true) ให้เด้งออกทันที ไม่ต้องทำอะไรต่อ
         if (isDead) return; 
 
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateUI();
 
-        // 🔴 สั่งให้ตัวละครกระพริบสีขาว 1 แว้บ (ทำงานได้แม้ลอยอยู่กลางอากาศ)
         if (spriteRender != null) StartCoroutine(FlashWhiteRoutine());
 
-        // เช็กว่าเลือดหมดหรือยัง
         if (currentHealth <= 0)
         {
             Die(); 
@@ -67,7 +77,6 @@ public class Health : MonoBehaviour
         }
     }
 
-    // 🔴 ฟังก์ชันสลับสีตัวละครให้เป็นสีขาว
     private IEnumerator FlashWhiteRoutine()
     {
         spriteRender.material = whiteMaterial;
@@ -77,45 +86,61 @@ public class Health : MonoBehaviour
 
     void Die()
     {
-        // ล็อกกุญแจทันที! เพื่อป้องกันไม่ให้คำสั่งนี้โดนเรียกซ้ำรัวๆ
         isDead = true; 
         
-        // สั่งให้ Animator เล่นท่าตาย
         if(anim != null) 
         {
             anim.SetFloat("Speed", 0);
             anim.SetFloat("Floating", 0);
-            anim.SetBool("isGrounded", true); // หลอกมันว่าอยู่บนพื้นแล้ว
-            
-            anim.SetTrigger("Dead"); // ค่อยสั่งให้ตาย
+            anim.SetBool("isGrounded", true); 
+            anim.SetTrigger("Dead"); 
         } 
 
-        // ปิดการเดินและหยุดความเร็วตัวละคร
         if(playerMovement != null) playerMovement.enabled = false;
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero; 
 
         gameObject.tag = "Untagged"; 
 
-        // เรียกใช้ฟังก์ชันเฟดหน้าจอตอนตาย
         if(deathUI != null)
         {
             StartCoroutine(FadeInDeathScreen());
         }
     }
 
-    // จัดการระบบค่อยๆ เฟดจอดำ
     IEnumerator FadeInDeathScreen()
     {
-        // 1. รอให้ตัวละครเล่นท่าตายจบก่อน 1.5 วินาที
         yield return new WaitForSeconds(1.5f);
 
-        // 2. ค่อยๆ ปรับค่า Alpha ของหน้าจอจาก 0 ไป 1
         float elapsedTime = 0f;
         while (elapsedTime < 1f)
         {
             elapsedTime += Time.deltaTime * fadeSpeed;
             deathUI.alpha = Mathf.Lerp(0f, 1f, elapsedTime);
             yield return null; 
+        }
+
+        if (deathUI != null)
+        {
+            deathUI.interactable = true;
+            deathUI.blocksRaycasts = true;
+        }
+
+        // 🔴 3. โค้ดดีเลย์ 3 วิ และเฟดปุ่มกลับมาแล้วครับ!
+        yield return new WaitForSeconds(1.5f);
+
+        if (restartButtonUI != null)
+        {
+            elapsedTime = 0f;
+            while (elapsedTime < 1f)
+            {
+                elapsedTime += Time.deltaTime * fadeSpeed;
+                restartButtonUI.alpha = Mathf.Lerp(0f, 1f, elapsedTime);
+                yield return null; 
+            }
+            
+            // เปิดให้ปุ่มกดได้
+            restartButtonUI.interactable = true;
+            restartButtonUI.blocksRaycasts = true;
         }
     }
 
@@ -130,5 +155,11 @@ public class Health : MonoBehaviour
     private void UpdateUI()
     {
         if (healthBar != null) healthBar.fillAmount = currentHealth / maxHealth;
+    }
+
+    // ฟังก์ชันสำหรับรีสตาร์ท
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
