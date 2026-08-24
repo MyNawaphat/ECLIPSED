@@ -24,6 +24,9 @@ public class EnemyController : MonoBehaviour
     public float maxIdleTime = 3f; // สุ่มเวลามากสุดที่จะหัน
     private float idleTimer;
 
+    [Header("ติ๊กถูกถ้ามอนสเตอร์หันผิดข้าง")]
+    public bool invertFlip = false;
+
     private Animator anim;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRender;
@@ -124,12 +127,15 @@ public class EnemyController : MonoBehaviour
     }
 
     void FlipSprite(bool faceRight)
+{
+    if (spriteRender != null)
     {
-        if (spriteRender != null)
-        {
+        if (invertFlip)
+            spriteRender.flipX = !faceRight; 
+        else
             spriteRender.flipX = faceRight; 
-        }
     }
+}
 
     public void TakeDamage(int damageAmount)
     {
@@ -144,9 +150,20 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         isDead = true;
+        
+        // 1. หยุดการเคลื่อนไหวและปิดแรงโน้มถ่วง ศพจะได้ไม่ร่วงทะลุพื้น!
         rb.linearVelocity = Vector2.zero; 
+        rb.gravityScale = 0f; 
+
+        // 2. เล่นแอนิเมชันตาย
         if (anim != null) anim.SetTrigger("isDead");
+        
+        // 3. ปิดกล่องชน ฮีโร่จะได้เดินเหยียบผ่านศพไปได้
         GetComponent<Collider2D>().enabled = false;
+        
+        // 4. สั่งทำลายวัตถุนี้ทิ้ง (ให้ศพหายไป) ในอีก 3 วินาทีข้างหน้า (เปลี่ยนตัวเลข 3f ได้ตามต้องการ)
+        Destroy(gameObject, 3f); 
+        
         this.enabled = false;
     }
 
