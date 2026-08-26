@@ -162,7 +162,7 @@ public class EnemyController : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         
         // 4. สั่งทำลายวัตถุนี้ทิ้ง (ให้ศพหายไป) ในอีก 3 วินาทีข้างหน้า (เปลี่ยนตัวเลข 3f ได้ตามต้องการ)
-        Destroy(gameObject, 3f); 
+        Destroy(gameObject, 2f); 
         
         this.enabled = false;
     }

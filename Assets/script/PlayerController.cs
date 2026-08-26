@@ -12,13 +12,16 @@ public class PlayerController : MonoBehaviour
     public Transform attackPoint;      
     public float attackRange = 0.5f;   
     public LayerMask enemyLayers;      
-    public int attackDamage = 40;
+    public int attackDamage1 = 40;
+    public int attackDamage2 = 60;
+    private int currentDamage;
     public float attackCooldown = 0.5f; // หน่วงเวลาฟัน (0.5 วินาทีฟันได้ 1 ครั้ง)
     private float nextAttackTime = 0f;   
 
     [Header("Stamina Costs (ใช้พลังงานเท่าไหร่)")]
     public float jumpStaminaCost = 15f; 
-    public float attackStaminaCost = 10f;
+    public float attackStaminaCost1 = 10f; // พลังงานที่ใช้ท่า 1 (ปุ่ม K)
+    public float attackStaminaCost2 = 25f;
 
     [Header("Status Effects")]
     public bool isStunned = false; 
@@ -86,8 +89,9 @@ public class PlayerController : MonoBehaviour
         // --- ระบบโจมตี (บังคับ && isGrounded กลับมาแล้ว) ---
         if (Input.GetKeyDown(KeyCode.K) && isGrounded) 
         {
-            if (Time.time >= nextAttackTime && staminaSystem.UseStamina(attackStaminaCost))
+            if (Time.time >= nextAttackTime && staminaSystem.UseStamina(attackStaminaCost1))
             {
+                currentDamage = attackDamage1;
                 anim.SetTrigger("Attack"); 
                 nextAttackTime = Time.time + attackCooldown;
             }
@@ -95,8 +99,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J) && isGrounded) 
         {
-            if (Time.time >= nextAttackTime && staminaSystem.UseStamina(attackStaminaCost))
+            if (Time.time >= nextAttackTime && staminaSystem.UseStamina(attackStaminaCost2))
             {
+                currentDamage = attackDamage2;
                 anim.SetTrigger("Attack2"); 
                 nextAttackTime = Time.time + attackCooldown;
             }
@@ -120,12 +125,21 @@ public class PlayerController : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers); 
         foreach (Collider2D enemy in hitEnemies) 
         {
-            // โจมตีโดนลูกกระจ๊อก
+            // โจมตีโดนลูกกระจ๊อกเดินดิน (สคริปต์เดิม)
             EnemyController enemyCtrl = enemy.GetComponent<EnemyController>();
-            if (enemyCtrl != null) enemyCtrl.TakeDamage(attackDamage);
+            if (enemyCtrl != null) enemyCtrl.TakeDamage(currentDamage);
 
+            // โจมตีโดนบอส (สคริปต์เดิม)
             BossController bossCtrl = enemy.GetComponent<BossController>();
-            if (bossCtrl != null) bossCtrl.TakeDamage(attackDamage);
+            if (bossCtrl != null) bossCtrl.TakeDamage(currentDamage);
+
+            // ➕ เพิ่มตรงนี้! สำหรับตีโดนมอนสเตอร์นกบิน
+            FlyingEnemy flyingCtrl = enemy.GetComponent<FlyingEnemy>();
+            if (flyingCtrl != null) flyingCtrl.TakeDamage(currentDamage);
+
+            // ➕ เพิ่มตรงนี้! สำหรับตีโดน Bringer
+            BringerEnemy bringerCtrl = enemy.GetComponent<BringerEnemy>();
+            if (bringerCtrl != null) bringerCtrl.TakeDamage(currentDamage);
         }
     }
 

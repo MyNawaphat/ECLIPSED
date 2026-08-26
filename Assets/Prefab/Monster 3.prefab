@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 938075550885883711}
   - component: {fileID: 9149923295778919994}
   - component: {fileID: 8602597375206511256}
+  - component: {fileID: 6425993623335674305}
   m_Layer: 3
   m_Name: Bringer
   m_TagString: Enemy
@@ -190,6 +191,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.42, y: 0.56}
   m_EdgeRadius: 0
+--- !u!114 &6425993623335674305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946726985266974537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9dce21d05cc264b863bc77bdc03ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BringerEnemy
+  maxHealth: 100
+  spellRange: 8
+  meleeRange: 2
+  moveSpeed: 3
+  attackCooldown: 2.5
 --- !u!1 &3516256785694451350
 GameObject:
   m_ObjectHideFlags: 0
