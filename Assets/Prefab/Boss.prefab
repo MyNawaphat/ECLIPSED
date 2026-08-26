@@ -163,6 +163,13 @@ MonoBehaviour:
   attackCooldown: 2
   heavyAttackChance: 0.3
   flashDuration: 0.1
+  healthBarFill: {fileID: 0}
+  bossHealthUIParent: {fileID: 0}
+  winUIObject: {fileID: 0}
+  winUIcanvasGroup: {fileID: 0}
+  fadeSpeed: 1
+  winUIDelay: 1.5
+  winRestartButtonUI: {fileID: 0}
   attackDamage: 1
   shakeDuration: 0.2
   shakeMagnitude: 0.4

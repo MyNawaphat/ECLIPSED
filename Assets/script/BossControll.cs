@@ -35,6 +35,7 @@ public class BossController : MonoBehaviour
     public CanvasGroup winUIcanvasGroup; 
     public float fadeSpeed = 1f; 
     public float winUIDelay = 1.5f;  // ➕ ช่องลาก WinUI_Container มาใส่
+    public CanvasGroup winRestartButtonUI;
 
     void Start()
     {
@@ -56,11 +57,19 @@ public class BossController : MonoBehaviour
         }
 
         // ➕ เพิ่มตรงนี้: ซ่อนหน้าจอชนะตอนเริ่มเกม (Alpha = 0)
-        if (winUIcanvasGroup != null)
+       if (winUIcanvasGroup != null)
         {
             winUIcanvasGroup.alpha = 0f;
             winUIcanvasGroup.interactable = false;
             winUIcanvasGroup.blocksRaycasts = false;
+        }
+
+        // ➕ สั่งซ่อนปุ่ม Restart ของหน้าจอชนะด้วย
+        if (winRestartButtonUI != null)
+        {
+            winRestartButtonUI.alpha = 0f;
+            winRestartButtonUI.interactable = false;
+            winRestartButtonUI.blocksRaycasts = false;
         }
     }
 
@@ -179,7 +188,7 @@ public class BossController : MonoBehaviour
     // ➕ 3. โค้ดสำหรับทำ Fade In หน้าจอชนะ (ถอดแบบมาจากไฟล์ Health.cs เป๊ะๆ)
     IEnumerator FadeInWinScreen()
     {
-        yield return new WaitForSeconds(winUIDelay); // รอจังหวะบอสตายแป๊บนึง
+        yield return new WaitForSeconds(1.5f); 
 
         float elapsedTime = 0f;
         while (elapsedTime < 1f)
@@ -193,6 +202,25 @@ public class BossController : MonoBehaviour
         {
             winUIcanvasGroup.interactable = true;
             winUIcanvasGroup.blocksRaycasts = true;
+        }
+
+        // ➕ 1. รอเวลาอีก 1.5 วินาที ให้คนเล่นชื่นชมคำว่า VICTORY ก่อน
+        yield return new WaitForSeconds(1.5f);
+
+        // ➕ 2. สั่งเฟดปุ่ม Restart ให้ค่อยๆ โผล่ขึ้นมา
+        if (winRestartButtonUI != null)
+        {
+            elapsedTime = 0f;
+            while (elapsedTime < 1f)
+            {
+                elapsedTime += Time.deltaTime * fadeSpeed;
+                winRestartButtonUI.alpha = Mathf.Lerp(0f, 1f, elapsedTime);
+                yield return null; 
+            }
+            
+            // เปิดให้ปุ่มสามารถกดได้
+            winRestartButtonUI.interactable = true;
+            winRestartButtonUI.blocksRaycasts = true;
         }
     }
 

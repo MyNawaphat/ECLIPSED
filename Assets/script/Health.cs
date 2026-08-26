@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     public float fadeSpeed = 1f; 
     // 🔴 1. เอากล่องใส่ปุ่ม Restart กลับมา
     public CanvasGroup restartButtonUI; 
+    public GameObject bossHealthUI;
 
     [Header("Hit Flash Effect")]
     public float flashDuration = 0.1f;
@@ -100,6 +101,11 @@ public class Health : MonoBehaviour
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero; 
 
         gameObject.tag = "Untagged"; 
+
+        if (bossHealthUI != null)
+        {
+            bossHealthUI.SetActive(false);
+        }
 
         if(deathUI != null)
         {

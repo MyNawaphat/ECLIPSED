@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class BringerEnemy : MonoBehaviour
 {
@@ -19,6 +20,14 @@ public class BringerEnemy : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRender;
 
+    [Header("Damage Settings")]
+    public float meleeDamage = 20f; // ดาเมจตอนฟันดาบ
+    public float spellDamage = 30f;
+
+    [Header("เวทมนตร์ (Spell)")]
+    public GameObject spellPrefab;
+    private GameObject currentActiveSpell;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -33,13 +42,20 @@ public class BringerEnemy : MonoBehaviour
     {
         if (isDead || player == null) return;
 
+        // 1. เช็กคาถาเก่าก่อน: ถ้าคาถายังอยู่ ให้รีเซ็ตเวลาคูลดาวน์ไว้
+        if (currentActiveSpell != null)
+        {
+            lastAttackTime = Time.time;
+        }
+
+        // 2. ประกาศตัวแปรแค่ "ครั้งเดียว" (เอามาไว้หลังเช็กคาถา จะได้คำนวณคูลดาวน์แม่นๆ)
         float dist = Vector2.Distance(transform.position, player.position);
         bool canAttack = Time.time >= lastAttackTime + attackCooldown;
 
-        // หันหน้า
+        // 3. หันหน้า
         spriteRender.flipX = player.position.x > transform.position.x;
 
-        // 1. ถ้าอยู่ใกล้มาก -> ฟันดาบ (Melee)
+        // 4. โจมตีระยะใกล้ (ฟันดาบ)
         if (dist <= meleeRange)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // หยุดเดิน
@@ -49,24 +65,25 @@ public class BringerEnemy : MonoBehaviour
                 lastAttackTime = Time.time;
             }
         }
-        // 2. ถ้าอยู่ไกลแต่อยู่ในระยะเวทมนตร์ -> ร่ายคาถา (Spell)
+        // 5. โจมตีระยะไกล (ร่ายเวท)
         else if (dist <= spellRange)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // หยุดเดิน
-            if (canAttack)
+            
+            if (canAttack && currentActiveSpell == null) 
             {
-                anim.SetTrigger("isSpell"); 
+                anim.SetTrigger("isCast"); 
                 lastAttackTime = Time.time;
             }
         }
-        // 3. ถ้าอยู่นอกระยะเวทมนตร์ -> เดินตาม
+        // 6. ถ้าอยู่นอกระยะโจมตี -> ให้เดินตาม (ในโค้ดที่คุณส่งมาตรงนี้หายไปครับ ผมเติมกลับมาให้แล้ว)
         else 
         {
             float direction = player.position.x > transform.position.x ? 1 : -1;
             rb.linearVelocity = new Vector2(direction * moveSpeed, rb.linearVelocity.y);
         }
 
-        // ส่งค่าความเร็วเดินไปให้อนิเมชัน
+        // 7. ส่งค่าความเร็วเดินไปให้ Animator
         anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
@@ -86,4 +103,49 @@ public class BringerEnemy : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 3f);
     }
+
+    public void Event_SpawnSpell()
+    {
+        if (player != null && spellPrefab != null)
+        {
+            // 1. คำนวณตำแหน่งและเสกคาถาออกมาให้เห็นก่อน (สมมติว่าปรับความสูงไว้ที่ 2.5f)
+            Vector3 spawnPos = player.position + new Vector3(0, 2.9f, 0); 
+            currentActiveSpell = Instantiate(spellPrefab, spawnPos, Quaternion.identity);
+            
+            // 2. 🔴 ลบโค้ดหักเลือดเดิมออก แล้วสั่งเริ่มระบบจับเวลาทำดาเมจ โดยส่งตำแหน่งที่คาถาลงไปให้ระบบจำไว้
+            StartCoroutine(SpellDamageDelay(spawnPos)); 
+        }
+    }
+    // ➕ ฟังก์ชันนี้เอาไว้เรียกตอนจังหวะดาบฟันโดนตัว
+    public void Event_MeleeHit()
+    {
+        // เช็กว่าฮีโร่อยู่ในระยะฟันหรือไม่ (ป้องกันบั๊กฮีโร่เดินหนีพ้นแล้วแต่ยังโดนดาเมจ)
+        if (player != null && Vector2.Distance(transform.position, player.position) <= meleeRange)
+        {
+            Health hp = player.GetComponent<Health>();
+            if (hp != null) hp.TakeDamage(meleeDamage); // หักเลือดฮีโร่
+        }
+    }
+
+    IEnumerator SpellDamageDelay(Vector3 targetPos)
+    {
+        // 1. ⏱️ หน่วงเวลาก่อนทำดาเมจ (ปรับเลขตรงนี้ให้ตรงกับจังหวะที่มือสีดำบีบลงมา เช่น 0.8f หรือ 1.0f วินาที)
+        yield return new WaitForSeconds(1.0f);
+
+        if (player != null)
+        {
+            // 2. คำนวณจุดกึ่งกลางของฮีโร่ปัจจุบัน เพื่อเอามาวัดระยะ
+            Vector3 playerCenter = player.position + new Vector3(0, 2.5f, 0);
+            
+            // 3. วัดระยะห่างระหว่าง "จุดที่คาถาลง" กับ "ตำแหน่งฮีโร่ปัจจุบัน"
+            float distance = Vector3.Distance(targetPos, playerCenter);
+
+            // 4. 🏃‍♂️ ถ้าระยะห่างน้อยกว่า 2.5 หน่วย แปลว่าฮีโร่เดินหนีไม่พ้นรัศมีวงเวท! (ปรับความกว้างรัศมีได้ที่เลข 2.5f)
+            if (distance <= 2.0f) 
+            {
+                Health hp = player.GetComponent<Health>();
+                if (hp != null) hp.TakeDamage(spellDamage); 
+            }
+        }
+}
 }
