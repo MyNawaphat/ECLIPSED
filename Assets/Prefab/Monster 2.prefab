@@ -206,9 +206,9 @@ MonoBehaviour:
   maxHealth: 100
   chaseSpeed: 4
   detectionRange: 9
-  attackRange: 6
+  attackRange: 5.5
   attackDamage: 15
-  attackCooldown: 1
+  attackCooldown: 1.5
   stunChance: 0
   stunDuration: 0
   minIdleTime: 1

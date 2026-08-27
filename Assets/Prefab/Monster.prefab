@@ -213,6 +213,7 @@ MonoBehaviour:
   stunDuration: 1.5
   minIdleTime: 1
   maxIdleTime: 3
+  invertFlip: 0
 --- !u!1 &7152701429743970780
 GameObject:
   m_ObjectHideFlags: 0

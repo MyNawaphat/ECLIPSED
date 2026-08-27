@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections; // 🔴 สำคัญ: ต้องมีบรรทัดนี้เพื่อใช้ระบบหน่วงเวลากระพริบสี
+using System.Collections; 
 using UnityEngine.UI;
 
 public class BossController : MonoBehaviour
@@ -17,7 +17,7 @@ public class BossController : MonoBehaviour
     [Header("Attack Chances")]
     [Tooltip("โอกาสออกท่าตีหนัก (0.0 ถึง 1.0) เช่น 0.3 คือ 30%")]
     public float heavyAttackChance = 0.3f; 
-    // 🔴 เพิ่มตัวแปรสำหรับกระพริบสีขาว
+    
     [Header("Hit Flash Effect")]
     public float flashDuration = 0.1f;
     private SpriteRenderer spriteRender;
@@ -29,13 +29,18 @@ public class BossController : MonoBehaviour
 
     [Header("UI หลอดเลือดและข้อความชนะ")]
     public Image healthBarFill; 
-    public GameObject bossHealthUIParent; // ➕ ช่องลากกรอบหลอดเลือดทั้งหมด (BossHealt_BG) มาใส่
+    public GameObject bossHealthUIParent; 
     public GameObject winUIObject;      
     
     public CanvasGroup winUIcanvasGroup; 
     public float fadeSpeed = 1f; 
-    public float winUIDelay = 1.5f;  // ➕ ช่องลาก WinUI_Container มาใส่
+    public float winUIDelay = 1.5f; 
     public CanvasGroup winRestartButtonUI;
+
+    // 🌟 1. สิ่งที่เพิ่มเข้ามา: ระบบปลุกบอสเมื่อเดินเข้าใกล้
+    [Header("Wake Up Settings")]
+    public float wakeUpRange = 12f; // ระยะที่ฮีโร่เดินมาใกล้แล้วบอสจะตื่น (ปรับเลขได้)
+    private bool isAwake = false;   // สถานะว่าบอสตื่นหรือยัง
 
     void Start()
     {
@@ -56,15 +61,19 @@ public class BossController : MonoBehaviour
             whiteMaterial = new Material(Shader.Find("GUI/Text Shader"));
         }
 
-        // ➕ เพิ่มตรงนี้: ซ่อนหน้าจอชนะตอนเริ่มเกม (Alpha = 0)
-       if (winUIcanvasGroup != null)
+        // 🌟 2. บังคับซ่อนหลอดเลือดบอสไว้ก่อนตั้งแต่เริ่มเกม
+        if (bossHealthUIParent != null)
+        {
+            bossHealthUIParent.SetActive(false); 
+        }
+
+        if (winUIcanvasGroup != null)
         {
             winUIcanvasGroup.alpha = 0f;
             winUIcanvasGroup.interactable = false;
             winUIcanvasGroup.blocksRaycasts = false;
         }
 
-        // ➕ สั่งซ่อนปุ่ม Restart ของหน้าจอชนะด้วย
         if (winRestartButtonUI != null)
         {
             winRestartButtonUI.alpha = 0f;
@@ -77,10 +86,23 @@ public class BossController : MonoBehaviour
     {
         if (player == null || currentHealth <= 0) return;
 
-        // เช็กระยะห่างแนวนอน (แกน X) ป้องกันบั๊กฮีโร่กระโดดข้ามหัว
         float distanceToPlayer = Mathf.Abs(transform.position.x - player.position.x);
 
-        FacePlayer(); // หันหน้ามองฮีโร่ตลอดเวลา
+        // 🌟 3. ถ้ายืนอยู่นอกระยะปลุกบอส ให้บอสยืนนิ่งๆ ไม่ทำอะไรเลย
+        if (!isAwake)
+        {
+            if (distanceToPlayer <= wakeUpRange)
+            {
+                isAwake = true; // บอสตื่นแล้ว!
+                if (bossHealthUIParent != null) bossHealthUIParent.SetActive(true); // โชว์หลอดเลือดบอส
+            }
+            else
+            {
+                return; // หยุดการทำงาน Update ไม่ให้เดินตามฮีโร่
+            }
+        }
+
+        FacePlayer(); 
 
         if (distanceToPlayer > attackRange)
         {
@@ -91,6 +113,7 @@ public class BossController : MonoBehaviour
             AttackPlayer(); 
         }
     }
+    
     void FacePlayer()
     {
         Vector3 scale = transform.localScale;
@@ -115,7 +138,6 @@ public class BossController : MonoBehaviour
 
         if (Time.time >= nextAttackTime)
         {
-            // สุ่มท่าโจมตี
             float randomChance = Random.value; 
             if (randomChance <= heavyAttackChance)
             {
@@ -134,7 +156,6 @@ public class BossController : MonoBehaviour
     {
         currentHealth -= damage;
         
-        // ➕ สั่งให้หลอดเลือด UI ลดลงตามเปอร์เซ็นต์เลือดที่เหลือ (เอาเลือดปัจจุบัน หาร เลือดสูงสุด)
         if (healthBarFill != null)
         {
             healthBarFill.fillAmount = (float)currentHealth / maxHealth;
@@ -148,7 +169,6 @@ public class BossController : MonoBehaviour
         }
     }
 
-    // 🔴 ฟังก์ชันสลับสีบอสเป็นสีขาว
     private IEnumerator FlashWhiteRoutine()
     {
         spriteRender.material = whiteMaterial;
@@ -169,26 +189,23 @@ public class BossController : MonoBehaviour
 
         GetComponent<Collider2D>().enabled = false;
         
-        // 1. ซ่อนกรอบหลอดเลือดบอสทันที
         if (bossHealthUIParent != null)
         {
             bossHealthUIParent.SetActive(false);
         }
 
-        // 2. ➕ สั่งรันระบบเฟดหน้าจอชนะขึ้นมาอย่างนุ่มนวล
         if (winUIcanvasGroup != null)
         {
-            if (winUIObject != null) winUIObject.SetActive(true); // เปิด Object รอไว้
+            if (winUIObject != null) winUIObject.SetActive(true); 
             StartCoroutine(FadeInWinScreen());
         }
 
         this.enabled = false;
     }
 
-    // ➕ 3. โค้ดสำหรับทำ Fade In หน้าจอชนะ (ถอดแบบมาจากไฟล์ Health.cs เป๊ะๆ)
     IEnumerator FadeInWinScreen()
     {
-        yield return new WaitForSeconds(1.5f); 
+        yield return new WaitForSeconds(winUIDelay); 
 
         float elapsedTime = 0f;
         while (elapsedTime < 1f)
@@ -204,10 +221,8 @@ public class BossController : MonoBehaviour
             winUIcanvasGroup.blocksRaycasts = true;
         }
 
-        // ➕ 1. รอเวลาอีก 1.5 วินาที ให้คนเล่นชื่นชมคำว่า VICTORY ก่อน
         yield return new WaitForSeconds(1.5f);
 
-        // ➕ 2. สั่งเฟดปุ่ม Restart ให้ค่อยๆ โผล่ขึ้นมา
         if (winRestartButtonUI != null)
         {
             elapsedTime = 0f;
@@ -218,7 +233,6 @@ public class BossController : MonoBehaviour
                 yield return null; 
             }
             
-            // เปิดให้ปุ่มสามารถกดได้
             winRestartButtonUI.interactable = true;
             winRestartButtonUI.blocksRaycasts = true;
         }
@@ -229,16 +243,13 @@ public class BossController : MonoBehaviour
     public float shakeDuration = 0.2f; 
     public float shakeMagnitude = 0.4f; 
 
-    // ฟังก์ชันทำงานตอนขวานสับลงพื้น
     public void Event_BossAttackHit()
     {
-        // สั่นกล้องตอนบอสสับ
         if (CameraShake.Instance != null)
         {
             CameraShake.Instance.TriggerShake(shakeDuration, shakeMagnitude);
         }
 
-        // 🔴 เช็กดาเมจแนวแกน X (ถึงฮีโร่กระโดดลอยอยู่ แต่ถ้าไม่พ้นขวานก็โดนดาเมจ)
         if (player != null && Mathf.Abs(transform.position.x - player.position.x) <= attackRange + 0.5f)
         {
             Health hp = player.GetComponent<Health>(); 
@@ -247,5 +258,12 @@ public class BossController : MonoBehaviour
                 hp.TakeDamage(attackDamage);
             }
         }
+    }
+
+    // 🌟 4. วาดเส้นวงกลมสีชมพูใน Scene เพื่อให้คุณกะระยะการตื่นของบอสได้ง่ายๆ
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, wakeUpRange); 
     }
 }

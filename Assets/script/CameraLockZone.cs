@@ -1,38 +1,33 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class CameraLockZone : MonoBehaviour
+public class CameraZone : MonoBehaviour
 {
-    [Header("จุดที่จะให้กล้องล็อก (ล็อกไว้กลางห้อง)")]
-    public Transform centerPoint;
+    [Header("ใส่ตัวเลขขอบเขตกล้องที่พอดีกับด่านนี้")]
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
 
-    private CameraFollow camScript;
-
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ค้นหากล้องหลักในฉาก
-        camScript = Camera.main.GetComponent<CameraFollow>();
-        
-        // ตั้งค่าให้โซนนี้เป็น Trigger (เดินทะลุได้)
-        GetComponent<BoxCollider2D>().isTrigger = true;
-    }
-
-    // เมื่อฮีโร่เดินเข้ามาในโซน
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        // ถ้าคนที่เดินเข้ามาในโซนนี้คือฮีโร่
+        if (collision.CompareTag("Player"))
         {
-            camScript.isFollowing = false; // สั่งกล้องเลิกตาม
-            camScript.lockPosition = centerPoint.position; // ล็อกกล้องไว้ที่จุด Center ที่เราตั้งไว้
-        }
-    }
+            // ค้นหากล้องหลัก และดึงสคริปต์ CameraFollow มา
+            CameraFollow camFollow = Camera.main.GetComponent<CameraFollow>();
+            
+            if (camFollow != null)
+            {
+                // สั่งเปิดใช้งาน Limit (เผื่อด่านก่อนหน้าปิดไว้)
+                // หมายเหตุ: ถ้าในสคริปต์คุณตั้งชื่อตัวแปร Use Limit ต่างออกไป ให้แก้บรรทัดนี้ให้ตรงกันนะครับ
+                // camFollow.useLimit = true; 
 
-    // เมื่อฮีโร่เดินออกจากโซน (หรือตีมอนตายแล้วประตูเปิดให้เดินออก)
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            camScript.isFollowing = true; // สั่งกล้องกลับมาตามฮีโร่เหมือนเดิม
+                // อัปเดตตัวเลขขอบเขตใหม่ให้เป็นของด่านนี้
+                camFollow.minX = this.minX;
+                camFollow.maxX = this.maxX;
+                camFollow.minY = this.minY;
+                camFollow.maxY = this.maxY;
+            }
         }
     }
 }
