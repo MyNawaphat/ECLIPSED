@@ -203,11 +203,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd565c8c28a08024589edf28ad040aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  maxHealth: 100
+  maxHealth: 150
   chaseSpeed: 4
-  detectionRange: 7
+  detectionRange: 10
   attackRange: 3
-  attackDamage: 15
+  attackDamage: 35
   attackCooldown: 2
   stunChance: 0.3
   stunDuration: 1.5
